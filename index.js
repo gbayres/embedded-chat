@@ -11,7 +11,22 @@
     #${uniqueId}-box{position:fixed;bottom:90px;right:20px;width:350px;height:500px;background:#0D0D0D;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.2);display:none;flex-direction:column;z-index:99999}
     #${uniqueId}-header{background:#BD0F0F;color:#fff;padding:15px;border-radius:12px 12px 0 0;font-weight:bold}
     #${uniqueId}-messages{flex:1;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:10px}
-    .${uniqueId}-msg{padding:10px;border-radius:8px;max-width:80%}
+    .${uniqueId}-msg{padding:10px;border-radius:8px;max-width:80%;word-wrap:break-word}
+    .${uniqueId}-msg p{margin:0 0 10px 0}
+    .${uniqueId}-msg p:last-child{margin:0}
+    .${uniqueId}-msg strong{font-weight:bold}
+    .${uniqueId}-msg em{font-style:italic}
+    .${uniqueId}-msg code{background:rgba(0,0,0,0.2);padding:2px 4px;border-radius:3px;font-family:monospace;font-size:0.9em}
+    .${uniqueId}-msg pre{background:rgba(0,0,0,0.3);padding:10px;border-radius:5px;overflow-x:auto;margin:10px 0}
+    .${uniqueId}-msg pre code{background:none;padding:0}
+    .${uniqueId}-msg ul,.${uniqueId}-msg ol{margin:10px 0;padding-left:20px}
+    .${uniqueId}-msg li{margin:5px 0}
+    .${uniqueId}-msg a{color:#4A9EFF;text-decoration:underline}
+    .${uniqueId}-msg h1,.${uniqueId}-msg h2,.${uniqueId}-msg h3{margin:10px 0 5px 0;font-weight:bold}
+    .${uniqueId}-msg h1{font-size:1.4em}
+    .${uniqueId}-msg h2{font-size:1.2em}
+    .${uniqueId}-msg h3{font-size:1.1em}
+    .${uniqueId}-msg blockquote{border-left:3px solid rgba(255,255,255,0.3);padding-left:10px;margin:10px 0;font-style:italic}
     .${uniqueId}-user{background:#444;color:#fff;align-self:flex-start}
     .${uniqueId}-bot{background:#BD0F0F;color:#fff;align-self:flex-end}
     .${uniqueId}-loading{background:#BD0F0F;color:#fff;align-self:flex-end;min-width:100px;padding:10px;border-radius:8px;max-width:80%}
@@ -45,6 +60,54 @@
   const messages = document.getElementById(`${uniqueId}-messages`);
   
   let chatHistory = [];
+  
+  // Simple markdown parser
+  const parseMarkdown = (text) => {
+    let html = text;
+    
+    // Code blocks (must be before inline code)
+    html = html.replace(/```([^\n]*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+    
+    // Inline code
+    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+    
+    // Headers
+    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+    html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+    
+    // Bold
+    html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+    
+    // Italic
+    html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    html = html.replace(/_([^_]+)_/g, '<em>$1</em>');
+    
+    // Links
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+    
+    // Blockquotes
+    html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
+    
+    // Unordered lists
+    html = html.replace(/^\* (.*$)/gim, '<li>$1</li>');
+    html = html.replace(/^- (.*$)/gim, '<li>$1</li>');
+    html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+    
+    // Ordered lists
+    html = html.replace(/^\d+\. (.*$)/gim, '<li>$1</li>');
+    
+    // Line breaks to paragraphs
+    html = html.split('\n\n').map(para => {
+      if (!para.match(/^<(h[123]|ul|ol|pre|blockquote)/)) {
+        return '<p>' + para.replace(/\n/g, '<br>') + '</p>';
+      }
+      return para;
+    }).join('');
+    
+    return html;
+  };
   
   // Load chat history from memory
   const loadHistory = () => {
@@ -83,7 +146,13 @@
   const addMessage = (text, isUser, save = true) => {
     const div = document.createElement('div');
     div.className = `${uniqueId}-msg ${isUser ? uniqueId + '-user' : uniqueId + '-bot'}`;
-    div.textContent = text;
+    
+    if (isUser) {
+      div.textContent = text;
+    } else {
+      div.innerHTML = parseMarkdown(text);
+    }
+    
     messages.appendChild(div);
     messages.scrollTop = messages.scrollHeight;
     
