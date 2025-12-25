@@ -6,16 +6,16 @@
   const uniqueId = 'chat-widget-' + Date.now();
   
   const styles = `
-    #${uniqueId}-btn{position:fixed;bottom:20px;right:20px;width:60px;height:60px;border-radius:50%;background:#007bff;color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:99999}
-    #${uniqueId}-box{position:fixed;bottom:90px;right:20px;width:350px;height:500px;background:#fff;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.2);display:none;flex-direction:column;z-index:99999}
-    #${uniqueId}-header{background:#007bff;color:#fff;padding:15px;border-radius:12px 12px 0 0;font-weight:bold}
+    #${uniqueId}-btn{position:fixed;bottom:20px;right:20px;width:60px;height:60px;border-radius:50%;background:#BD0F0F;color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:99999}
+    #${uniqueId}-box{position:fixed;bottom:90px;right:20px;width:350px;height:500px;background:#0C0C0C;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.2);display:none;flex-direction:column;z-index:99999}
+    #${uniqueId}-header{background:#BD0F0F;color:#fff;padding:15px;border-radius:12px 12px 0 0;font-weight:bold}
     #${uniqueId}-messages{flex:1;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:10px}
     .${uniqueId}-msg{padding:10px;border-radius:8px;max-width:80%}
-    .${uniqueId}-user{background:#007bff;color:#fff;align-self:flex-end}
-    .${uniqueId}-bot{background:#f1f1f1;align-self:flex-start}
-    #${uniqueId}-input-box{display:flex;padding:10px;border-top:1px solid #ddd}
+    .${uniqueId}-user{background:#444;color:#fff;align-self:flex-end}
+    .${uniqueId}-bot{background:#BD0F0F;color:#fff;align-self:flex-start}
+    #${uniqueId}-input-box{display:flex;padding:10px;border-top:1px solid #444}
     #${uniqueId}-input{flex:1!important;padding:10px!important;border:1px solid #ddd!important;border-radius:8px!important;outline:none!important;background:#fff!important;color:#000!important;font-size:14px!important;line-height:normal!important;box-sizing:border-box!important;margin:0!important;pointer-events:auto!important}
-    #${uniqueId}-send{background:#007bff!important;color:#fff!important;border:none!important;padding:10px 20px!important;margin-left:8px!important;border-radius:8px!important;cursor:pointer!important;pointer-events:auto!important}
+    #${uniqueId}-send{background:#BD0F0F!important;color:#fff!important;border:none!important;padding:10px 20px!important;margin-left:8px!important;border-radius:8px!important;cursor:pointer!important;pointer-events:auto!important}
   `;
   
   const container = document.createElement('div');
