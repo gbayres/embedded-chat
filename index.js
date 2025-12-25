@@ -13,7 +13,7 @@
     #${uniqueId}-box{position:fixed;bottom:90px;right:20px;width:350px;height:500px;background:#1D1D1D;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.2);display:none;flex-direction:column;z-index:99999}
     #${uniqueId}-header{background:#BD0F0F;color:#fff;padding:15px;border-radius:12px 12px 0 0;font-weight:bold}
     #${uniqueId}-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:10px}
-    .${uniqueId}-msg{padding:10px 15px;border-radius:8px;max-width:80%;word-wrap:break-word;overflow-wrap:break-word}
+    .${uniqueId}-msg{color:#fff;padding:10px 15px;border-radius:8px;max-width:80%;word-wrap:break-word;overflow-wrap:break-word}
     .${uniqueId}-msg p{margin:0 0 10px 0}
     .${uniqueId}-msg p:last-child{margin:0}
     .${uniqueId}-msg strong{font-weight:bold}
