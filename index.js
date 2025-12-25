@@ -10,7 +10,7 @@
   const styles = `
     #${uniqueId}-btn{position:fixed;bottom:20px;right:20px;width:60px;height:60px;border-radius:50%;background:#BD0F0F;color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:99999;transition:transform 0.2s}
     #${uniqueId}-btn:hover{transform:scale(1.1)}
-    #${uniqueId}-box{position:fixed;bottom:90px;right:20px;width:350px;height:500px;background:#0D0D0D;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.2);display:none;flex-direction:column;z-index:99999}
+    #${uniqueId}-box{position:fixed;bottom:90px;right:20px;width:350px;height:500px;background:#1D1D1D;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.2);display:none;flex-direction:column;z-index:99999}
     #${uniqueId}-header{background:#BD0F0F;color:#fff;padding:15px;border-radius:12px 12px 0 0;font-weight:bold}
     #${uniqueId}-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:10px}
     .${uniqueId}-msg{padding:10px 15px;border-radius:8px;max-width:80%;word-wrap:break-word;overflow-wrap:break-word}
