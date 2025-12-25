@@ -39,7 +39,18 @@
   const send = document.getElementById(`${uniqueId}-send`);
   const messages = document.getElementById(`${uniqueId}-messages`);
   
-  btn.onclick = () => box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+  btn.onclick = () => {
+    box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+  };
+  
+  // Close on click outside
+  document.addEventListener('click', (e) => {
+    if (box.style.display === 'flex' && 
+        !box.contains(e.target) && 
+        !btn.contains(e.target)) {
+      box.style.display = 'none';
+    }
+  });
   
   const addMessage = (text, isUser) => {
     const div = document.createElement('div');
