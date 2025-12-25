@@ -4,16 +4,16 @@
   const API_TOKEN = script.getAttribute('data-api-token');
   
   const styles = `
-    #chat-btn{position:fixed;bottom:20px;right:20px;width:60px;height:60px;border-radius:50%;background:#007bff;color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:9999}
-    #chat-box{position:fixed;bottom:90px;right:20px;width:350px;height:500px;background:#fff;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.2);display:none;flex-direction:column;z-index:9999}
+    #chat-btn{position:fixed;bottom:20px;right:20px;width:60px;height:60px;border-radius:50%;background:#007bff;color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:99999}
+    #chat-box{position:fixed;bottom:90px;right:20px;width:350px;height:500px;background:#fff;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.2);display:none;flex-direction:column;z-index:99999}
     #chat-header{background:#007bff;color:#fff;padding:15px;border-radius:12px 12px 0 0;font-weight:bold}
     #chat-messages{flex:1;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:10px}
     .msg{padding:10px;border-radius:8px;max-width:80%}
     .user{background:#007bff;color:#fff;align-self:flex-end}
     .bot{background:#f1f1f1;align-self:flex-start}
     #chat-input-box{display:flex;padding:10px;border-top:1px solid #ddd}
-    #chat-input{flex:1;padding:10px;border:1px solid #ddd;border-radius:8px;outline:none}
-    #chat-send{background:#007bff;color:#fff;border:none;padding:10px 20px;margin-left:8px;border-radius:8px;cursor:pointer}
+    #chat-input{flex:1;padding:10px;border:1px solid #ddd;border-radius:8px;outline:none;pointer-events:auto}
+    #chat-send{background:#007bff;color:#fff;border:none;padding:10px 20px;margin-left:8px;border-radius:8px;cursor:pointer;pointer-events:auto}
   `;
   
   const container = document.createElement('div');
@@ -24,7 +24,7 @@
       <div id="chat-header">Chat</div>
       <div id="chat-messages"></div>
       <div id="chat-input-box">
-        <input id="chat-input" placeholder="Digite sua mensagem..." />
+        <input type="text" id="chat-input" placeholder="Digite sua mensagem..." autocomplete="off" />
         <button id="chat-send">Enviar</button>
       </div>
     </div>
