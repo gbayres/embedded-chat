@@ -193,7 +193,7 @@
         content: msg.text
       }));
 
-      const previousMessagesStr = JSON.stringify(previousMessages);
+      const previousMessagesStr = JSON.stringify(previousMessages.slice(-10));
       
       const res = await fetch(API_URL, {
         method: 'POST',
