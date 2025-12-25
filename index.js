@@ -22,7 +22,7 @@
     .${uniqueId}-msg pre{background:rgba(0,0,0,0.3);padding:10px;border-radius:5px;overflow-x:auto;margin:10px 0}
     .${uniqueId}-msg pre code{background:none;padding:0}
     .${uniqueId}-msg ul,.${uniqueId}-msg ol{margin:10px 0;padding-left:25px}
-    .${uniqueId}-msg li{margin:12px 0; padding-left:12px;}
+    .${uniqueId}-msg li{margin:12px 0; margin-left:12px;}
     .${uniqueId}-msg a{color:#4A9EFF;text-decoration:underline}
     .${uniqueId}-msg h1,.${uniqueId}-msg h2,.${uniqueId}-msg h3{margin:10px 0 5px 0;font-weight:bold}
     .${uniqueId}-msg h1{font-size:1.4em}
@@ -160,10 +160,21 @@
     }
   };
   
+  // Scroll to show the top of the newest message
+  const scrollToNewestMessage = () => {
+    const lastMessage = messages.lastElementChild;
+    if (lastMessage) {
+      // Scroll so the top of the message is visible
+      lastMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+  
   btn.onclick = () => {
     box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
     if (box.style.display === 'flex') {
       input.focus();
+      // Scroll to newest message when opening
+      setTimeout(scrollToNewestMessage, 100);
     }
   };
   
@@ -194,7 +205,7 @@
     }
     
     messages.appendChild(div);
-    messages.scrollTop = messages.scrollHeight;
+    scrollToNewestMessage();
     
     if (save) {
       saveToHistory(text, isUser);
@@ -207,7 +218,7 @@
     div.id = `${uniqueId}-loading-indicator`;
     div.textContent = 'Digitando';
     messages.appendChild(div);
-    messages.scrollTop = messages.scrollHeight;
+    scrollToNewestMessage();
   };
   
   const hideLoading = () => {
