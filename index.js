@@ -8,6 +8,7 @@
   const STORAGE_KEY = 'chat-widget-history';
   
   const styles = `
+    html{ font-family: Arial, sans-serif; }
     #${uniqueId}-btn{position:fixed;bottom:20px;right:20px;width:60px;height:60px;border-radius:50%;background:#BD0F0F;color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:99999;transition:transform 0.2s}
     #${uniqueId}-btn:hover{transform:scale(1.1)}
     #${uniqueId}-box{position:fixed;bottom:90px;right:20px;width:350px;height:500px;background:#1D1D1D;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.2);display:none;flex-direction:column;z-index:99999}
