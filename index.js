@@ -14,7 +14,7 @@
     .${uniqueId}-msg{padding:10px;border-radius:8px;max-width:80%}
     .${uniqueId}-user{background:#444;color:#fff;align-self:flex-start}
     .${uniqueId}-bot{background:#BD0F0F;color:#fff;align-self:flex-end}
-    .${uniqueId}-loading{background:#BD0F0F;color:#fff;align-self:flex-end;padding:10px;border-radius:8px;max-width:80%}
+    .${uniqueId}-loading{background:#BD0F0F;color:#fff;align-self:flex-end;min-width:100px;padding:10px;border-radius:8px;max-width:80%}
     .${uniqueId}-loading::after{content:'...';animation:${uniqueId}-dots 1.5s steps(4,end) infinite}
     @keyframes ${uniqueId}-dots{0%,20%{content:''}40%{content:'.'}60%{content:'..'}80%,100%{content:'...'}}
     #${uniqueId}-input-box{display:flex;padding:10px;border-top:1px solid #444}
@@ -123,6 +123,7 @@
         role: msg.isUser ? 'user' : 'assistant',
         content: msg.text
       }));
+      console.log(previousMessages)
       
       const res = await fetch(API_URL, {
         method: 'POST',
@@ -132,7 +133,12 @@
         },
         body: JSON.stringify({ 
           message: text,
-          history: previousMessages
+          prompt: `Você é um chatbot que irá ajudar cirurgiões vasculares respondendo suas dúvidas de forma clara e objetiva. 
+          Você deve ser sempre comprometido com a literatura científica e ter extrema precisão. Sempre que possível, cite artigos científicos para embasar suas respostas.
+          Nunca invente informações ou artigos científicos que não existam. Use linguagem formal e técnica, adequada para profissionais da área médica.
+          Responda sempre em português do Brasil.
+          Histórico de mensagens: ${previousMessages}
+          `,
         })
       });
       
