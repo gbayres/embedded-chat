@@ -44,22 +44,24 @@
   const send = document.getElementById(`${uniqueId}-send`);
   const messages = document.getElementById(`${uniqueId}-messages`);
   
+  let chatHistory = [];
+  
   // Load chat history from memory
   const loadHistory = () => {
     try {
-      const history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      history.forEach(msg => addMessage(msg.text, msg.isUser, false));
+      chatHistory = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      chatHistory.forEach(msg => addMessage(msg.text, msg.isUser, false));
     } catch (err) {
       console.error('Error loading chat history:', err);
+      chatHistory = [];
     }
   };
   
   // Save message to memory
   const saveToHistory = (text, isUser) => {
     try {
-      const history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      history.push({ text, isUser, timestamp: Date.now() });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+      chatHistory.push({ text, isUser, timestamp: Date.now() });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(chatHistory));
     } catch (err) {
       console.error('Error saving to history:', err);
     }
@@ -116,13 +118,22 @@
     showLoading();
     
     try {
+      // Format previous messages for context
+      const previousMessages = chatHistory.map(msg => ({
+        role: msg.isUser ? 'user' : 'assistant',
+        content: msg.text
+      }));
+      
       const res = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'x-api-token': API_TOKEN,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ message: text })
+        body: JSON.stringify({ 
+          message: text,
+          history: previousMessages
+        })
       });
       
       const data = await res.json();
