@@ -123,7 +123,8 @@
         role: msg.isUser ? 'user' : 'assistant',
         content: msg.text
       }));
-      console.log(previousMessages)
+
+      const previousMessagesStr = JSON.stringify(previousMessages);
       
       const res = await fetch(API_URL, {
         method: 'POST',
@@ -137,7 +138,8 @@
           Você deve ser sempre comprometido com a literatura científica e ter extrema precisão. Sempre que possível, cite artigos científicos para embasar suas respostas.
           Nunca invente informações ou artigos científicos que não existam. Use linguagem formal e técnica, adequada para profissionais da área médica.
           Responda sempre em português do Brasil.
-          Histórico de mensagens: ${previousMessages}
+          Você tem que considerar o histórico de mensagens citado abaixo para entender o contexto da conversa.
+          Histórico de mensagens: ${previousMessagesStr}
           `,
         })
       });
