@@ -21,7 +21,7 @@
     .${uniqueId}-msg pre{background:rgba(0,0,0,0.3);padding:10px;border-radius:5px;overflow-x:auto;margin:10px 0}
     .${uniqueId}-msg pre code{background:none;padding:0}
     .${uniqueId}-msg ul,.${uniqueId}-msg ol{margin:10px 0;padding-left:25px}
-    .${uniqueId}-msg li{margin:12px 0}
+    .${uniqueId}-msg li{margin:12px; padding-left:12px; 0}
     .${uniqueId}-msg a{color:#4A9EFF;text-decoration:underline}
     .${uniqueId}-msg h1,.${uniqueId}-msg h2,.${uniqueId}-msg h3{margin:10px 0 5px 0;font-weight:bold}
     .${uniqueId}-msg h1{font-size:1.4em}
